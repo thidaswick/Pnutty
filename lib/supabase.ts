@@ -1,5 +1,6 @@
 import { createClient, SupabaseClient } from "@supabase/supabase-js";
 import type { Product } from "@/types";
+import { withResolvedProductImage, withResolvedProductImages } from "@/utils/product-images";
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL ?? "";
 const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ?? "";
@@ -93,7 +94,7 @@ export async function getProducts(): Promise<Product[]> {
     .order("created_at", { ascending: true });
 
   if (error || !data?.length) return FALLBACK_PRODUCTS;
-  return data as Product[];
+  return withResolvedProductImages(data as Product[]);
 }
 
 export async function getProductBySlug(slug: string): Promise<Product | null> {
@@ -112,7 +113,7 @@ export async function getProductBySlug(slug: string): Promise<Product | null> {
   if (error || !data) {
     return FALLBACK_PRODUCTS.find((p) => p.slug === slug) ?? null;
   }
-  return data as Product;
+  return withResolvedProductImage(data as Product);
 }
 
 export async function getProductById(id: string): Promise<Product | null> {
@@ -130,7 +131,7 @@ export async function getProductById(id: string): Promise<Product | null> {
   if (error || !data) {
     return FALLBACK_PRODUCTS.find((p) => p.id === id) ?? null;
   }
-  return data as Product;
+  return withResolvedProductImage(data as Product);
 }
 
 export async function getAllProductsAdmin(): Promise<Product[]> {
@@ -143,5 +144,5 @@ export async function getAllProductsAdmin(): Promise<Product[]> {
     .order("created_at", { ascending: true });
 
   if (error || !data) return FALLBACK_PRODUCTS;
-  return data as Product[];
+  return withResolvedProductImages(data as Product[]);
 }

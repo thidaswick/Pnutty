@@ -16,10 +16,10 @@ This copies and renames all files into `public/images/` for the Next.js site.
 |------------------------|-----------------------------|
 | `Pnutty-logo.jpg` | `pnutty-logo.jpg` |
 | `Pnutty-variations.jpg` | `pnutty-variations.jpg` |
-| `classic_cruncy.png` | `classic-crunchy.png` |
-| `classic_creamy.png` | `classic-creamy.png` |
-| `choco_curncy.png` | `choco-crunchy.png` |
-| `choco_creamy.png` | `choco-creamy.png` |
+| `classic_cruncy-removebg-preview.png` | `classic-crunchy.png` |
+| `classic_creamy-removebg-preview.png` | `classic-creamy.png` |
+| `choco_curncy-removebg-preview.png` | `choco-crunchy.png` |
+| `choco_creamy-removebg-preview.png` | `choco-creamy.png` |
 | `yellow_pattern_background.png` | `yellow-pattern-background.png` |
 | `purple_pattern_background.png` | `purple-pattern-background.png` |
 | `green_pattern_background.png` | `green-pattern-background.png` |

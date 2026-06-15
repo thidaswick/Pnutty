@@ -18,25 +18,11 @@ const galleryItems = [
     fit: "cover" as const,
   },
   {
-    src: "/images/classic-crunchy.png",
-    label: "Classic Crunchy",
-    bg: "bg-cream",
-    span: "col-span-1 row-span-1",
-    fit: "contain" as const,
-  },
-  {
     src: "/images/v2.jpg",
     label: "Nutty vibes",
     bg: "bg-blue-soft",
     span: "col-span-1 row-span-1",
     fit: "cover" as const,
-  },
-  {
-    src: "/images/choco-creamy.png",
-    label: "Choco Creamy",
-    bg: "bg-pink-soft",
-    span: "col-span-1 row-span-1",
-    fit: "contain" as const,
   },
   {
     src: "/images/v3.jpg",
@@ -49,7 +35,7 @@ const galleryItems = [
     src: "/images/v4.jpg",
     label: "@pnutty.lk",
     bg: "bg-peanut/20",
-    span: "col-span-2 row-span-1 md:col-span-1",
+    span: "col-span-1 row-span-1",
     fit: "cover" as const,
   },
 ];

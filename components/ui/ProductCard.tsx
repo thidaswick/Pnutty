@@ -1,10 +1,10 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import Badge from "./Badge";
 import Button from "./Button";
+import ProductImage from "./ProductImage";
 import { useCart } from "@/lib/cart-context";
 import type { Product } from "@/types";
 import { formatPriceNumber, cn } from "@/utils/format";
@@ -78,13 +78,12 @@ export default function ProductCard({
           "ring-inset"
         )}
       >
-        <div className="relative h-48 w-48 transition-transform duration-500 ease-out group-hover:scale-105 sm:h-52 sm:w-52 md:h-56 md:w-56">
-          <Image
-            src={product.image_url}
-            alt={product.name}
-            fill
-            className="object-contain drop-shadow-2xl"
-            sizes="(max-width: 768px) 176px, 208px"
+        <div className="relative h-52 w-full min-h-[220px] transition-transform duration-500 ease-out group-hover:scale-105 sm:min-h-[240px] md:min-h-[260px]">
+          <ProductImage
+            product={product}
+            className="drop-shadow-2xl"
+            sizes="(max-width: 768px) 50vw, 280px"
+            priority={bgIndex === 0}
           />
         </div>
       </Link>

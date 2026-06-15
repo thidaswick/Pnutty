@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import { notFound } from "next/navigation";
 import Badge from "@/components/ui/Badge";
+import ProductImage from "@/components/ui/ProductImage";
 import ProductDetailClient from "@/components/products/ProductDetailClient";
 import { getProductBySlug, getProducts } from "@/lib/supabase";
 import { formatPriceNumber } from "@/utils/format";
@@ -41,12 +41,12 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
 
   const bgClass =
     product.category === "Classic" && product.texture === "Crunchy"
-      ? "bg-green/10"
+      ? "bg-green-soft"
       : product.category === "Choco" && product.texture === "Crunchy"
-        ? "bg-blue/10"
+        ? "bg-blue-soft"
         : product.category === "Choco" && product.texture === "Creamy"
-          ? "bg-pink/10"
-          : "bg-peanut/10";
+          ? "bg-pink-soft"
+          : "bg-peanut-light/30";
 
   return (
     <div className="pt-24">
@@ -61,14 +61,12 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
                   <Badge>{product.badge}</Badge>
                 </div>
               )}
-              <div className="relative h-72 w-72 md:h-96 md:w-96">
-                <Image
-                  src={product.image_url}
-                  alt={product.name}
-                  fill
-                  className="object-contain drop-shadow-2xl"
+              <div className="relative h-80 w-full min-h-[320px] md:min-h-[400px]">
+                <ProductImage
+                  product={product}
+                  className="drop-shadow-2xl"
                   priority
-                  sizes="(max-width: 768px) 288px, 384px"
+                  sizes="(max-width: 768px) 100vw, 50vw"
                 />
               </div>
             </div>
