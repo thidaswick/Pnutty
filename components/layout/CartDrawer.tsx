@@ -29,7 +29,7 @@ export default function CartDrawer() {
 
       <aside
         className={cn(
-          "fixed right-0 top-0 z-[70] flex h-full w-full max-w-md flex-col bg-cream shadow-2xl transition-transform duration-300",
+          "fixed right-0 top-0 z-[70] flex h-full w-full max-w-md flex-col bg-cream shadow-2xl transition-transform duration-400 ease-out sm:max-w-lg",
           isOpen ? "translate-x-0" : "translate-x-full"
         )}
         aria-label="Shopping cart"
@@ -67,7 +67,7 @@ export default function CartDrawer() {
               {items.map((item) => (
                 <li
                   key={item.product.id}
-                  className="flex gap-4 rounded-card bg-white p-4 shadow-sm"
+                  className="flex gap-4 rounded-card-lg bg-white p-4 shadow-sm ring-1 ring-chocolate/5"
                 >
                   <div className="relative h-20 w-20 shrink-0">
                     <Image

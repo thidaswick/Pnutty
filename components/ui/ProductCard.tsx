@@ -16,10 +16,17 @@ interface ProductCardProps {
 }
 
 const bgColors = [
-  "bg-green/10",
-  "bg-blue/10",
-  "bg-pink/10",
-  "bg-peanut/10",
+  "bg-green-soft",
+  "bg-blue-soft",
+  "bg-pink-soft",
+  "bg-peanut-light/30",
+];
+
+const ringColors = [
+  "ring-green/15",
+  "ring-blue/15",
+  "ring-pink/15",
+  "ring-peanut/25",
 ];
 
 export default function ProductCard({
@@ -42,87 +49,94 @@ export default function ProductCard({
     addItem(product, quantity);
   };
 
+  const displayName = product.name
+    .replace("Peanut Butter ", "")
+    .replace("Classic ", "Classic ")
+    .replace("Choco ", "Choco ");
+
   return (
     <article
       className={cn(
-        "group relative flex flex-col overflow-hidden rounded-card bg-white shadow-lg transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl",
+        "group relative flex flex-col overflow-hidden rounded-card-lg bg-white shadow-card ring-1 ring-chocolate/5 transition-all duration-500 ease-out hover:-translate-y-2 hover:shadow-card-hover",
         className
       )}
     >
       {product.badge && (
         <div className="absolute left-4 top-4 z-10">
-          <Badge variant="default">{product.badge}</Badge>
+          <Badge variant="default" className="shadow-sm">
+            {product.badge}
+          </Badge>
         </div>
       )}
 
       <Link
         href={`/products/${product.slug}`}
         className={cn(
-          "relative flex items-center justify-center p-6 transition-colors",
-          bgColors[bgIndex]
+          "relative flex items-center justify-center overflow-hidden p-6 pb-4 transition-colors sm:p-8",
+          bgColors[bgIndex],
+          ringColors[bgIndex],
+          "ring-inset"
         )}
       >
-        <div className="relative h-48 w-48 transition-transform duration-500 group-hover:scale-110 md:h-56 md:w-56">
+        <div className="relative h-48 w-48 transition-transform duration-500 ease-out group-hover:scale-105 sm:h-52 sm:w-52 md:h-56 md:w-56">
           <Image
             src={product.image_url}
             alt={product.name}
             fill
-            className="object-contain drop-shadow-xl"
-            sizes="(max-width: 768px) 192px, 224px"
+            className="object-contain drop-shadow-2xl"
+            sizes="(max-width: 768px) 176px, 208px"
           />
         </div>
       </Link>
 
-      <div className="flex flex-1 flex-col gap-4 p-6">
+      <div className="flex flex-1 flex-col gap-3.5 p-5 sm:gap-4 sm:p-6">
         <div className="flex flex-wrap gap-2">
           <Badge variant="chocolate">{product.category}</Badge>
           <Badge variant="default">{product.texture}</Badge>
         </div>
 
         <Link href={`/products/${product.slug}`}>
-          <h3 className="font-display text-xl font-bold text-chocolate transition-colors hover:text-peanut">
-            {product.name.replace("Peanut Butter ", "")}
+          <h3 className="font-display text-lg font-bold leading-snug text-chocolate transition-colors duration-200 group-hover:text-chocolate-light sm:text-xl">
+            {displayName}
           </h3>
         </Link>
 
         {variant !== "compact" && (
-          <p className="line-clamp-2 text-sm text-chocolate/70">
+          <p className="line-clamp-2 text-sm leading-relaxed text-chocolate/65">
             {product.description}
           </p>
         )}
 
-        <div className="mt-auto flex items-end justify-between gap-4">
+        <div className="mt-auto flex items-end justify-between gap-3">
           <div>
-            <p className="text-sm text-chocolate/60">
+            <p className="text-xs font-semibold uppercase tracking-wide text-chocolate/50">
               {product.size} · LKR
             </p>
-            <p className="font-display text-2xl font-bold text-chocolate">
+            <p className="font-display text-2xl font-bold text-chocolate sm:text-[1.65rem]">
               {formatPriceNumber(product.price)}
             </p>
           </div>
 
-          <div className="flex items-center gap-2">
-            <div className="flex items-center rounded-full border border-chocolate/20 bg-cream">
-              <button
-                type="button"
-                onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                className="flex h-8 w-8 items-center justify-center rounded-full text-chocolate transition-colors hover:bg-peanut/20"
-                aria-label="Decrease quantity"
-              >
-                −
-              </button>
-              <span className="w-8 text-center text-sm font-semibold">
-                {quantity}
-              </span>
-              <button
-                type="button"
-                onClick={() => setQuantity(quantity + 1)}
-                className="flex h-8 w-8 items-center justify-center rounded-full text-chocolate transition-colors hover:bg-peanut/20"
-                aria-label="Increase quantity"
-              >
-                +
-              </button>
-            </div>
+          <div className="flex items-center rounded-full border border-chocolate/12 bg-cream shadow-sm">
+            <button
+              type="button"
+              onClick={() => setQuantity(Math.max(1, quantity - 1))}
+              className="flex h-9 w-9 items-center justify-center rounded-full text-lg font-bold text-chocolate transition-colors hover:bg-peanut/25"
+              aria-label="Decrease quantity"
+            >
+              −
+            </button>
+            <span className="w-8 text-center text-sm font-bold">
+              {quantity}
+            </span>
+            <button
+              type="button"
+              onClick={() => setQuantity(quantity + 1)}
+              className="flex h-9 w-9 items-center justify-center rounded-full text-lg font-bold text-chocolate transition-colors hover:bg-peanut/25"
+              aria-label="Increase quantity"
+            >
+              +
+            </button>
           </div>
         </div>
 

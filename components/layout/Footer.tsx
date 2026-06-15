@@ -17,30 +17,48 @@ const brandLinks = [
 
 export default function Footer() {
   return (
-    <footer className="pattern-chocolate text-cream">
-      <div className="mx-auto max-w-7xl px-4 py-16 md:px-6 lg:px-8">
-        <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-4">
-          <div className="space-y-4">
+    <footer className="relative pattern-chocolate text-cream">
+      {/* Top wave */}
+      <div className="absolute -top-px left-0 right-0 h-8 overflow-hidden sm:h-10">
+        <svg
+          viewBox="0 0 1440 48"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          className="w-full"
+          preserveAspectRatio="none"
+        >
+          <path
+            d="M0 48V24C240 0 480 0 720 24C960 48 1200 48 1440 24V48H0Z"
+            fill="#5e2f11"
+          />
+        </svg>
+      </div>
+
+      <div className="mx-auto max-w-7xl px-5 pb-10 pt-16 sm:px-6 sm:pb-12 sm:pt-20 lg:px-8">
+        <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4 lg:gap-12">
+          <div className="space-y-5 sm:col-span-2 lg:col-span-1">
             <Image
-              src="/images/pnutty-logo.png"
+              src="/images/pnutty-logo.jpg"
               alt="Pnutty"
-              width={140}
-              height={56}
-              className="h-12 w-auto brightness-0 invert"
+            width={150}
+            height={60}
+            className="h-11 w-auto sm:h-12"
             />
-            <p className="text-sm leading-relaxed text-cream/80">
+            <p className="max-w-xs text-sm leading-relaxed text-cream/75">
               Spread the Nutty Goodness. Made with love in Sri Lanka 🇱🇰
             </p>
           </div>
 
           <div>
-            <h4 className="mb-4 font-display text-lg font-bold">Shop</h4>
-            <ul className="space-y-2">
+            <h4 className="mb-4 font-display text-base font-bold tracking-wide text-peanut sm:text-lg">
+              Shop
+            </h4>
+            <ul className="space-y-2.5">
               {shopLinks.map((link) => (
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-sm text-cream/70 transition-colors hover:text-peanut"
+                    className="text-sm text-cream/65 transition-colors duration-200 hover:text-peanut"
                   >
                     {link.label}
                   </Link>
@@ -50,13 +68,15 @@ export default function Footer() {
           </div>
 
           <div>
-            <h4 className="mb-4 font-display text-lg font-bold">Brand</h4>
-            <ul className="space-y-2">
+            <h4 className="mb-4 font-display text-base font-bold tracking-wide text-peanut sm:text-lg">
+              Brand
+            </h4>
+            <ul className="space-y-2.5">
               {brandLinks.map((link) => (
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-sm text-cream/70 transition-colors hover:text-peanut"
+                    className="text-sm text-cream/65 transition-colors duration-200 hover:text-peanut"
                   >
                     {link.label}
                   </Link>
@@ -66,43 +86,46 @@ export default function Footer() {
           </div>
 
           <div>
-            <h4 className="mb-4 font-display text-lg font-bold">Stay nutty</h4>
-            <ul className="space-y-2 text-sm text-cream/70">
+            <h4 className="mb-4 font-display text-base font-bold tracking-wide text-peanut sm:text-lg">
+              Stay nutty
+            </h4>
+            <ul className="space-y-2.5 text-sm text-cream/65">
               <li>
                 <a
                   href="mailto:hello@pnutty.lk"
-                  className="transition-colors hover:text-peanut"
+                  className="transition-colors duration-200 hover:text-peanut"
                 >
                   hello@pnutty.lk
                 </a>
               </li>
               <li>Colombo, Sri Lanka</li>
-              <li className="flex gap-4 pt-2">
+              <li className="flex gap-3 pt-2">
                 <a
                   href="https://instagram.com/pnutty.lk"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="transition-colors hover:text-peanut"
+                  className="flex h-10 w-10 items-center justify-center rounded-full bg-cream/10 text-xs font-bold transition-all duration-200 hover:bg-peanut hover:text-chocolate"
                   aria-label="Instagram"
                 >
-                  Instagram
+                  IG
                 </a>
                 <a
                   href="https://facebook.com/pnutty.lk"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="transition-colors hover:text-peanut"
+                  className="flex h-10 w-10 items-center justify-center rounded-full bg-cream/10 text-xs font-bold transition-all duration-200 hover:bg-peanut hover:text-chocolate"
                   aria-label="Facebook"
                 >
-                  Facebook
+                  FB
                 </a>
               </li>
             </ul>
           </div>
         </div>
 
-        <div className="mt-12 border-t border-cream/10 pt-8 text-center text-sm text-cream/50">
-          © {new Date().getFullYear()} Pnutty. All rights reserved.
+        <div className="mt-12 flex flex-col items-center justify-between gap-3 border-t border-cream/10 pt-8 text-center text-xs text-cream/45 sm:flex-row sm:text-left sm:text-sm">
+          <p>© {new Date().getFullYear()} Pnutty. All rights reserved.</p>
+          <p className="text-cream/35">Spread the Nutty Goodness 🥜</p>
         </div>
       </div>
     </footer>

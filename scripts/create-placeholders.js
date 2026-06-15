@@ -1,7 +1,7 @@
 const fs = require("fs");
 const path = require("path");
 
-const dir = path.join(__dirname, "public", "images");
+const dir = path.join(__dirname, "..", "public", "images");
 fs.mkdirSync(dir, { recursive: true });
 
 const pngBase64 =

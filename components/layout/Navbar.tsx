@@ -2,8 +2,9 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useCart } from "@/lib/cart-context";
+import Button from "@/components/ui/Button";
 import { cn } from "@/utils/format";
 
 const navLinks = [
@@ -17,38 +18,67 @@ const navLinks = [
 export default function Navbar() {
   const { itemCount, toggleCart } = useCart();
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 24);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  useEffect(() => {
+    document.body.style.overflow = mobileOpen ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [mobileOpen]);
 
   return (
-    <header className="fixed left-0 right-0 top-0 z-50">
-      <nav className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 md:px-6 lg:px-8">
-        <Link href="/" className="relative z-50 flex items-center gap-2">
+    <header className="fixed left-0 right-0 top-0 z-50 px-4 pt-4 md:px-6 lg:px-8">
+      <nav
+        className={cn(
+          "mx-auto flex max-w-7xl items-center justify-between rounded-full px-4 py-2.5 transition-all duration-500 md:px-6",
+          scrolled
+            ? "bg-white/90 shadow-card backdrop-blur-xl"
+            : "bg-white/60 shadow-sm backdrop-blur-md"
+        )}
+      >
+        <Link href="/" className="relative z-50 flex shrink-0 items-center">
           <Image
-            src="/images/pnutty-logo.png"
+            src="/images/pnutty-logo.jpg"
             alt="Pnutty"
-            width={120}
-            height={48}
-            className="h-10 w-auto md:h-12"
+            width={130}
+            height={52}
+            className="h-9 w-auto sm:h-10 md:h-11"
             priority
           />
         </Link>
 
-        <div className="hidden items-center gap-8 md:flex">
+        <div className="hidden items-center gap-1 lg:flex xl:gap-2">
           {navLinks.map((link) => (
             <Link
               key={link.href}
               href={link.href}
-              className="font-display text-sm font-semibold text-chocolate transition-colors hover:text-peanut"
+              className="rounded-full px-3.5 py-2 font-display text-sm font-semibold text-chocolate/85 transition-all duration-200 hover:bg-peanut/15 hover:text-chocolate xl:px-4"
             >
               {link.label}
             </Link>
           ))}
         </div>
 
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2 sm:gap-3">
+          <Link
+            href="/products"
+            className="hidden rounded-full bg-chocolate px-4 py-2 font-display text-sm font-semibold text-cream shadow-button transition-all duration-300 hover:-translate-y-0.5 hover:bg-chocolate-light hover:shadow-button-hover sm:inline-flex"
+          >
+            Shop
+          </Link>
+
           <button
             type="button"
             onClick={toggleCart}
-            className="relative flex h-11 w-11 items-center justify-center rounded-full bg-white/90 text-chocolate shadow-md backdrop-blur-sm transition-all hover:bg-white hover:shadow-lg"
+            className="relative flex h-10 w-10 items-center justify-center rounded-full bg-cream text-chocolate shadow-sm ring-1 ring-chocolate/10 transition-all duration-300 hover:bg-peanut/20 hover:shadow-md sm:h-11 sm:w-11"
             aria-label="Open cart"
           >
             <svg
@@ -66,7 +96,7 @@ export default function Navbar() {
               />
             </svg>
             {itemCount > 0 && (
-              <span className="absolute -right-1 -top-1 flex h-5 w-5 items-center justify-center rounded-full bg-peanut text-xs font-bold text-chocolate">
+              <span className="absolute -right-0.5 -top-0.5 flex h-5 w-5 items-center justify-center rounded-full bg-peanut text-[10px] font-bold text-chocolate ring-2 ring-white">
                 {itemCount}
               </span>
             )}
@@ -75,7 +105,7 @@ export default function Navbar() {
           <button
             type="button"
             onClick={() => setMobileOpen(!mobileOpen)}
-            className="flex h-11 w-11 items-center justify-center rounded-full bg-white/90 text-chocolate shadow-md backdrop-blur-sm md:hidden"
+            className="flex h-10 w-10 items-center justify-center rounded-full bg-cream font-display text-lg text-chocolate shadow-sm ring-1 ring-chocolate/10 transition-all hover:bg-peanut/20 lg:hidden"
             aria-label="Toggle menu"
           >
             {mobileOpen ? "✕" : "☰"}
@@ -83,23 +113,37 @@ export default function Navbar() {
         </div>
       </nav>
 
+      {/* Mobile menu */}
       <div
         className={cn(
-          "fixed inset-0 z-40 bg-chocolate/95 backdrop-blur-md transition-all duration-300 md:hidden",
-          mobileOpen ? "visible opacity-100" : "invisible opacity-0"
+          "fixed inset-0 z-40 bg-chocolate/96 backdrop-blur-xl transition-all duration-400 lg:hidden",
+          mobileOpen
+            ? "visible opacity-100"
+            : "invisible opacity-0 pointer-events-none"
         )}
       >
-        <div className="flex h-full flex-col items-center justify-center gap-8">
-          {navLinks.map((link) => (
+        <div className="flex h-full flex-col items-center justify-center gap-6 px-6">
+          {navLinks.map((link, i) => (
             <Link
               key={link.href}
               href={link.href}
               onClick={() => setMobileOpen(false)}
-              className="font-display text-2xl font-bold text-cream transition-colors hover:text-peanut"
+              className="font-display text-3xl font-bold text-cream transition-all duration-300 hover:scale-105 hover:text-peanut"
+              style={{ animationDelay: `${i * 60}ms` }}
             >
               {link.label}
             </Link>
           ))}
+          <div className="mt-4">
+            <Button
+              href="/products"
+              variant="primary"
+              size="lg"
+              onClick={() => setMobileOpen(false)}
+            >
+              Shop Now
+            </Button>
+          </div>
         </div>
       </div>
     </header>

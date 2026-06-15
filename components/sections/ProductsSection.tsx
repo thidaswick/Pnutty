@@ -12,15 +12,15 @@ export default async function ProductsSection() {
   }
 
   return (
-    <section id="products" className="py-20 md:py-28">
-      <div className="mx-auto max-w-7xl px-4 md:px-6 lg:px-8">
+    <section id="products" className="bg-cream section-padding">
+      <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
         <SectionHeading
           badge="Our Range"
           title="Four Jars. Endless Mood."
           subtitle="Made fresh, never compromised. Pick your nutty match below."
         />
 
-        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-5 sm:grid-cols-2 sm:gap-6 lg:grid-cols-4 lg:gap-7">
           {products.map((product) => (
             <ProductCard key={product.id} product={product} />
           ))}

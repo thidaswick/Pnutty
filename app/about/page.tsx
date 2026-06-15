@@ -52,7 +52,7 @@ export default function AboutPage() {
             <div className="relative flex items-center justify-center rounded-card bg-peanut/20 p-12">
               <div className="relative h-64 w-64">
                 <Image
-                  src="/images/pnutty-logo.png"
+                  src="/images/pnutty-logo.jpg"
                   alt="Pnutty Logo"
                   fill
                   className="object-contain"

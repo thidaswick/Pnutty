@@ -34,8 +34,8 @@ export default function ContactSection() {
   };
 
   return (
-    <section id="contact" className="pattern-cream py-20 md:py-28">
-      <div className="mx-auto max-w-7xl px-4 md:px-6 lg:px-8">
+    <section id="contact" className="bg-section-cream section-padding">
+      <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
         <SectionHeading
           badge="Say Hi"
           title="Order. Ask."
@@ -110,7 +110,7 @@ export default function ContactSection() {
 
           <form
             onSubmit={handleSubmit}
-            className="rounded-card bg-white p-8 shadow-lg"
+            className="rounded-card-lg bg-white p-7 shadow-card ring-1 ring-chocolate/5 sm:p-8"
           >
             <h3 className="mb-6 font-display text-xl font-bold text-chocolate">
               Send a message
